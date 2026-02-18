@@ -9,13 +9,13 @@ Fixed::Fixed()
 Fixed::Fixed(const Fixed &src)
 {
     this->value = src.value;
-    std::cout << "Copy assignment called" << std::endl;
+    std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed &Fixed::operator=(const Fixed &toAssign)
 {
     this->value = toAssign.value;
-    std::cout << "Copy assignment operator called" << std::endl;
+    std::cout << "Assignment operator called" << std::endl;
     return (*this);
 }
 

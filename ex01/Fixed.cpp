@@ -18,6 +18,11 @@ Fixed::Fixed (const float nb)
     this->value = nb * (1 << this->fractionalBits);
 }
 
+Fixed::Fixed(const Fixed &other)
+{
+    *this = other;
+    std::cout << "Copy constructor called" << std::endl;
+}
 Fixed &Fixed::operator=(const Fixed &toAssign)
 {
     this->value = toAssign.value;

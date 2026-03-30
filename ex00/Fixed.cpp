@@ -8,14 +8,15 @@ Fixed::Fixed()
 
 Fixed::Fixed(const Fixed &src)
 {
-    this->value = src.value;
     std::cout << "Copy constructor called" << std::endl;
+    this->value = src.getRawBits();
 }
 
 Fixed &Fixed::operator=(const Fixed &toAssign)
 {
-    this->value = toAssign.value;
-    std::cout << "Assignment operator called" << std::endl;
+    std::cout << "Copy assignment operator called" << std::endl;
+    if (this != &toAssign)                 // ← on compare les adresses
+        this->value = toAssign.getRawBits();
     return (*this);
 }
 

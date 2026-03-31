@@ -15,18 +15,19 @@ Fixed::Fixed (int const n)
 Fixed::Fixed (const float nb)
 {
     std::cout << "Float constructor called" << std::endl;
-    this->value = nb * (1 << this->fractionalBits);
+    this->value = roundf(nb * (1 << this->fractionalBits));
 }
 
 Fixed::Fixed(const Fixed &other)
 {
-    *this = other;
     std::cout << "Copy constructor called" << std::endl;
+    this->value = other.value;
 }
 Fixed &Fixed::operator=(const Fixed &toAssign)
 {
-    this->value = toAssign.value;
     std::cout << "Copy assignment operator called" << std::endl;
+    if (this != &toAssign)
+        this->value = toAssign.value;
     return (*this);
 }
 

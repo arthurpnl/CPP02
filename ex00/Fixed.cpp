@@ -15,7 +15,7 @@ Fixed::Fixed(const Fixed &src)
 Fixed &Fixed::operator=(const Fixed &toAssign)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    if (this != &toAssign)                 // ← on compare les adresses
+    if (this != &toAssign)
         this->value = toAssign.getRawBits();
     return (*this);
 }

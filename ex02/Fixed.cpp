@@ -2,27 +2,33 @@
 
 Fixed::Fixed()
 {
+    //std::cout << "Default constructor called" << std::endl;
     this->value = 0;
 }
 
-Fixed::Fixed(int const n)
+Fixed::Fixed (int const n)
 {
+    //std::cout << "Int constructor called" << std::endl;
     this->value = n * (1 << this->fractionalBits);
 }
 
-Fixed::Fixed(const float nb)
+Fixed::Fixed (const float nb)
 {
+    //std::cout << "Float constructor called" << std::endl;
     this->value = roundf(nb * (1 << this->fractionalBits));
 }
 
 Fixed::Fixed(const Fixed &other)
 {
-    *this = other;
+    //std::cout << "Copy constructor called" << std::endl;
+    this->value = other.value;
 }
 
 Fixed &Fixed::operator=(const Fixed &toAssign)
 {
-    this->value = toAssign.value;
+    //std::cout << "Copy assignment operator called" << std::endl;
+    if (this != &toAssign)
+        this->value = toAssign.value;
     return (*this);
 }
 
@@ -90,22 +96,30 @@ bool Fixed::operator!=(const Fixed &other) const
 // Arithmetic operators
 Fixed Fixed::operator+(const Fixed &other) const
 {
-    return Fixed(toFloat() + other.toFloat());
+    Fixed result;
+    result.setRawBits(this->value + other.value);
+    return result;
 }
 
 Fixed Fixed::operator-(const Fixed &other) const
 {
-    return Fixed(toFloat() - other.toFloat());
+    Fixed result;
+    result.setRawBits(this->value - other.value);
+    return result;
 }
 
 Fixed Fixed::operator*(const Fixed &other) const
 {
-    return Fixed(toFloat() * other.toFloat());
+    Fixed result;
+    result.setRawBits((this->value * other.value) >> fractionalBits);
+    return result;
 }
 
 Fixed Fixed::operator/(const Fixed &other) const
 {
-    return Fixed(toFloat() / other.toFloat());
+    Fixed result;
+    result.setRawBits((this->value << fractionalBits) / other.value);
+    return result;
 }
 
 // Increment/Decrement
